@@ -5,6 +5,10 @@ exports.main = async function (req, res) {
     var Pool = require('pg-pool');
     var pool = new pg.Pool(router.ccp_db);
 
+    // Отключение CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+
     // Валидатор
     // Запрос данных с базы данных
     const resultArray = await (async () => {

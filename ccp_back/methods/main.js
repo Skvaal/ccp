@@ -3,6 +3,10 @@ exports.main = async function (req, res) {
     const bip39 = require('bip39');
     const crypto = require('crypto');
 
+    // Отключение CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+
     // Генерируем мнемоническую фразу
     var mnemonic = await bip39.generateMnemonic();
     // Переводим из мнемонической фразы в Seed

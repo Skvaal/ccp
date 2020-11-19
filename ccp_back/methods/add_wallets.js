@@ -6,6 +6,10 @@ exports.main = async function (req, res) {
     var pool = new pg.Pool(router.ccp_db);
     const crypto = require('crypto');
 
+    // Отключение CORS
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Headers', 'origin, content-type, accept');
+
     // Валидатор
     try {
         var transactions = [];

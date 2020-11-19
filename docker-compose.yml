@@ -4,16 +4,16 @@ networks:
     external:
       name: ccp-network
 services:
-  ccp:
-    container_name: ccp
-    build: .
+  ccp_back:
+    container_name: ccp_back
+    build: ./ccp_back
     restart: always
     ports:
       - "6001:4000"
     networks:
       default:
         aliases:
-          - ccp.ccp-network
+          - ccp_back.ccp-network
     depends_on:
       - ccp_db
     links:
@@ -33,3 +33,18 @@ services:
       default:
         aliases:
           - ccp_db.ccp-network
+
+  ccp_ui:
+    container_name: ccp_ui
+    build: ./ccp_ui
+    restart: always
+    ports:
+      - "6500:3000"
+    networks:
+      default:
+        aliases:
+          - ccp_ui.ccp-network
+    depends_on:
+      - ccp_back
+    links:
+      - ccp_back
