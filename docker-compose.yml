@@ -1,0 +1,35 @@
+version: '3'
+networks:
+  default:
+    external:
+      name: ccp-network
+services:
+  ccp:
+    container_name: ccp
+    build: .
+    restart: always
+    ports:
+      - "6001:4000"
+    networks:
+      default:
+        aliases:
+          - ccp.ccp-network
+    depends_on:
+      - ccp_db
+    links:
+      - ccp_db
+
+
+  ccp_db:
+    container_name: ccp_db
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: pg1313LK3fpjlk
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - '6002:5432'
+    networks:
+      default:
+        aliases:
+          - ccp_db.ccp-network
